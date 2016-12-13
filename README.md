@@ -83,16 +83,16 @@ Future Plans
 
 Developers
 -------------
-Felix Kunde
-Manal Faraj
-Stephan Pieper
+* Felix Kunde
+* Manal Faraj
+* Stephan Pieper
 
 
 Contact
 ----------
-fkunde@beuth-hochschule.de
-spieper@beuth-hochschule.de
-sauer@beuth-hochschule.de
+* fkunde [at] beuth-hochschule.de
+* spieper [at] beuth-hochschule.de
+* sauer [at] beuth-hochschule.de
 
 
 Special Thanks
