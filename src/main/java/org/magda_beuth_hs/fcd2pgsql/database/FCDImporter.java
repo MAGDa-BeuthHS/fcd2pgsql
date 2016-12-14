@@ -132,7 +132,7 @@ public class FCDImporter {
         
         // get all GPS points by the given car_id  
         PreparedStatement sGPX = connection.prepareStatement(
-        		"SELECT longitude, latitude, gps_time, speed FROM floating_car_data WHERE car_id = ? ORDER BY gps_time"
+        		"SELECT longitude, latitude, gps_time, CASE WHEN speed = 0 THEN 1 ELSE speed END FROM floating_car_data WHERE car_id = ? ORDER BY gps_time"
         		);
         sGPX.setInt(1, carID);
         ResultSet result_GPX = sGPX.executeQuery();
