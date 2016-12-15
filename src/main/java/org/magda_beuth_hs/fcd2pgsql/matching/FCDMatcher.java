@@ -209,17 +209,18 @@ public class FCDMatcher {
     	
     	// now, set speed and time per gap point and add it to fcdWithoutGaps list
     	// case 1: Start has no measure. Use constant speed. Time = Distance/Speed.
+    	// case 1: Start has no measure. Use constant speed. Time = Distance/Speed.
 		if (gap.get(0).getTime() == 0)
 			for (int i=0;i<gap.size()-1;i++) {
 				gap.get(i).setSpeed(gap.get(gap.size()-1).getSpeed());
-				gap.get(i).setTime(gap.get(gap.size()-1).getTime() - (long) ((distance - accumDist.get(i))/(gap.get(i).getSpeed()/3.6)));
+				gap.get(i).setTime(gap.get(gap.size()-1).getTime() - (long) ((distance - accumDist.get(i))/(gap.get(i).getSpeed()/3.6) * 1000));
 				fcdWithoutGaps.add(gap.get(i));
 			}
 		// case 2: End has no measure. Use constant speed. Time = Distance/Speed.
 		else if (gap.get(gap.size()-1).getTime() == 0)
 			for (int i=1;i<gap.size();i++) {
 				gap.get(i).setSpeed(gap.get(0).getSpeed());
-				gap.get(i).setTime(gap.get(0).getTime() + (long) (accumDist.get(i)/(gap.get(i).getSpeed()/3.6)));
+				gap.get(i).setTime(gap.get(0).getTime() + (long) (accumDist.get(i)/(gap.get(i).getSpeed()/3.6) * 1000));
 				fcdWithoutGaps.add(gap.get(i));
 			}
 		// case 3: Boundary points have time and measure. Use constant acceleration. Time = 2*Distance/Speed
@@ -227,7 +228,7 @@ public class FCDMatcher {
 			double slope = (gap.get(0).getSpeed() - gap.get(gap.size()-1).getSpeed()) / (0 - distance);
 			for (int i=1;i<gap.size()-1;i++) {
 				gap.get(i).setSpeed((int) Math.round(slope * accumDist.get(i) + gap.get(0).getSpeed()));
-				gap.get(i).setTime(gap.get(i-1).getTime() + (long) (2 * accumDist.get(i)/(gap.get(i).getSpeed()/3.6)));
+				gap.get(i).setTime(gap.get(i-1).getTime() + (long) (2 * accumDist.get(i)/(gap.get(i).getSpeed()/3.6) * 1000));
 				fcdWithoutGaps.add(gap.get(i));
 			}
 		}
