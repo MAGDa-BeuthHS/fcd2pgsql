@@ -70,7 +70,7 @@ public class DBUtil {
         List<Point> points = new ArrayList<Point>();
         for(FCDEntry fcdEntry : fcdEntries) {
             Point point = new Point(fcdEntry.lon, fcdEntry.lat, (double) fcdEntry.getSpeed());
-            point.setM(fcdEntry.getTime());
+            point.setM(fcdEntry.getTime()/1000); // we don't need milliseconds
             point.setSrid(4326);
             points.add(point);
         }
