@@ -209,7 +209,6 @@ public class FCDMatcher {
     	
     	// now, set speed and time per gap point and add it to fcdWithoutGaps list
     	// case 1: Start has no measure. Use constant speed. Time = Distance/Speed.
-    	// case 1: Start has no measure. Use constant speed. Time = Distance/Speed.
 		if (gap.get(0).getTime() == 0)
 			for (int i=0;i<gap.size()-1;i++) {
 				gap.get(i).setSpeed(gap.get(gap.size()-1).getSpeed());
