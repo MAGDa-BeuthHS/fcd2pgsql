@@ -45,7 +45,7 @@ public class FCDImporter {
     	try {
     		// set variables for DB import
         	connection.setAutoCommit(false);
-    		insertStmt = connection.prepareStatement("INSERT INTO matched_tracks (start_time, end_time, geom) VALUES (?, ?, ?)");
+    		insertStmt = connection.prepareStatement("INSERT INTO matched_tracks_occupied (start_time, end_time, geom) VALUES (?, ?, ?)");
         
     		// fetch FCD senders
     		senders = fetchSenders();
@@ -134,7 +134,9 @@ public class FCDImporter {
         PreparedStatement sGPX = connection.prepareStatement(new StringBuilder()
         		.append("SELECT longitude, latitude, gps_time, ")
         		.append("CASE WHEN speed = 0 THEN 1 WHEN speed > 200 THEN 200 ELSE speed END AS speed ")
-        		.append("FROM floating_car_data WHERE car_id = ? ORDER BY gps_time")
+        		.append("FROM floating_car_data WHERE car_id = ? ")
+        		.append("AND occupied = 1 ")
+        		.append("ORDER BY gps_time")
         		.toString()
         		);
         sGPX.setInt(1, carID);

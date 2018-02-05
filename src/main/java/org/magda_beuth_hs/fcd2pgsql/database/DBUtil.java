@@ -23,7 +23,7 @@ public class DBUtil {
         try {
         	// first create a sequence for the new table
             createSeq = connection.createStatement();            
-            createSeq.executeUpdate("CREATE SEQUENCE matched_tracks_seq");
+            createSeq.executeUpdate("CREATE SEQUENCE matched_tracks_occupied_seq");
             System.out.println("Sequence 'matched_tracks_seq' successfully created.");
         } catch (SQLException e) {
         	System.out.println("Sequence 'matched_tracks_seq' already exists.");
@@ -33,8 +33,8 @@ public class DBUtil {
             // now create the new table
             createTable = connection.createStatement();
             StringBuilder table = new StringBuilder()
-            		.append("CREATE TABLE matched_tracks (")
-            		.append("id INT PRIMARY KEY NOT NULL DEFAULT nextval('matched_tracks_seq'),")
+            		.append("CREATE TABLE matched_tracks_occupied (")
+            		.append("id INT PRIMARY KEY NOT NULL DEFAULT nextval('matched_tracks_occupied_seq'),")
             		.append("start_time TIMESTAMP WITHOUT TIME ZONE,")
             		.append("end_time TIMESTAMP WITHOUT TIME ZONE,")
             		.append("geom GEOMETRY(LineStringZM,4326)")
